@@ -1,20 +1,18 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
-#define SCREEN_WIDTH 640
+#define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480
 
 
+#include <cstdlib>
+#include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
-#include <sstream>
-#include <iostream>
-#include <cstdlib>
 
 
-
-static void check_audio_driver(const char *name)
-{
+static void check_audio_driver(const char* name) {
   std::cout << "checking for audio driver " << name << " ... ";
   int count = SDL_GetNumAudioDrivers();
   for (int i = 0; i < count; ++i) {
@@ -26,8 +24,7 @@ static void check_audio_driver(const char *name)
   std::cout << "Not Found :(\n";
 }
 
-static void check_video_driver(const char *name)
-{
+static void check_video_driver(const char* name) {
   std::cout << "checking for video driver " << name << " ... ";
   int count = SDL_GetNumVideoDrivers();
   for (int i = 0; i < count; ++i) {
@@ -40,7 +37,7 @@ static void check_video_driver(const char *name)
 }
 
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   SDL_version v;
   SDL_GetVersion(&v);
   std::cout << "SDL version " << int(v.major) << "." << int(v.minor) << "." << int(v.patch) << std::endl;
@@ -53,19 +50,14 @@ int main(int argc, char *argv[]) {
   check_audio_driver("directsound");
 
 
-  SDL_Window *window = NULL;
-  SDL_Surface *screenSurface = NULL;
-//  if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-//    fprintf(stderr, "could not initialize sdl2: %s\n", SDL_GetError());
-//    return 1;
-//  }
-  window = SDL_CreateWindow(
-    "hello_sdl2",
-    SDL_WINDOWPOS_UNDEFINED,
-    SDL_WINDOWPOS_UNDEFINED,
-    SCREEN_WIDTH,
-    SCREEN_HEIGHT,
-    SDL_WINDOW_SHOWN);
+  SDL_Window*  window        = NULL;
+  SDL_Surface* screenSurface = NULL;
+  //  if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+  //    fprintf(stderr, "could not initialize sdl2: %s\n", SDL_GetError());
+  //    return 1;
+  //  }
+  window = SDL_CreateWindow("hello_sdl2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT,
+                            SDL_WINDOW_SHOWN);
   if (window == NULL) {
     fprintf(stderr, "could not create window: %s\n", SDL_GetError());
     return 1;
